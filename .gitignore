@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+
+# Mac OS
+.DS_Store
+
+# IDEs
+.vscode/
+
+# Machine Learning Models
+models/
+*.pkl
+*.h5
+*.joblib

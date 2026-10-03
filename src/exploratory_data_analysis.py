@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 index_names = ["unit_nr", "time_cycles"]
 setting_names = ['setting_1', 'setting_2', 'setting_3']
@@ -44,4 +45,17 @@ print(test_last_cycle.describe())
 
 print("\n--- Ground Truth RUL Summary (RUL_FD001.txt) ---")
 print(df_rul.describe())
+
+df_train_processed = pd.read_csv("dataset/train_processed.csv")
+engine_1 = df_train_processed[df_train_processed["unit_nr"] == 1]
+plt.figure(figsize=(12, 5))
+
+plt.plot(engine_1["time_cycles"], engine_1["s_2"], label = "Sensore 2 data", alpha = 0.6)
+plt.plot(engine_1['time_cycles'], engine_1['s_3'], label='Sensore 3 data', alpha=0.6)
+plt.xlabel("Time (cycles)")
+plt.ylabel("Sensor Value")
+plt.legend()
+plt.grid(True)
+plt.show()
+
 
