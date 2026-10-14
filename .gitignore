@@ -13,3 +13,15 @@ models/
 *.pkl
 *.h5
 *.joblib
+
+# N-CMAPSS collaboration: local environments, data and generated files
+.venv/
+.ipynb_checkpoints/
+*.hdf5
+*.hdf
+n_cmapss/data/*
+!n_cmapss/data/.gitkeep
+n_cmapss/outputs/
+*.tmp
+*.temp
+~$*
