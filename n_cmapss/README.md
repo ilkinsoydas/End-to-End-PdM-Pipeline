@@ -94,3 +94,20 @@ Paylaşım kopyalarında **bütün kayıtlı hücre çıktıları, execution cou
 02'nin CSV düğmesi ve 04/05'in özetleri `n_cmapss/outputs/` altında yeni dosyalar oluşturur. 04/05'te eski CSV'ler üzerine yazılmaz. `.gitignore`, yerel sanal ortamı, HDF5'i, N-CMAPSS yerel verisini, çıktı klasörünü, notebook checkpoint ve geçici dosyalarını dışlar. Eski projedeki takip edilen CSV'lere genel `*.csv` kuralı eklenmemiştir.
 
 04'te alt gruba girmeyen ölçümler genel EDA'dan çıkarılmaz; seçim yanlılığı ve rejim temsili sınırları açıklanır. 05'te altı motorun bütün 5.263.447 dev ölçümü kapsam dahilindedir. Grafik farkları tek başına nedensellik, arıza başlangıcı veya sensör önem sırası göstermez.
+
+
+## Türkçe öğretici dokümantasyon ve güncel analizler
+
+- [DS02 Değişken Sözlüğü](docs/DS02_Degisken_Sozlugu.md): 47 değişken, birimler, motor bileşenleri, fiziksel/sanal sensör ayrımı ve hs/HI/RUL/EOL kavramları.
+- [Motor ve Sensör Atlası](docs/DS02_Motor_ve_Sensor_Atlasi.md): açıklamalı motor kesiti, akış sistemleri ve sensörlerin konum/yorum rehberi.
+- [Merkezi değişken etiketi sözlüğü](docs/assets/ds02_variable_metadata.json): notebook grafiklerinde ortak Türkçe ad ve birim kaynağı. SVG/PNG çizimler ve bunları üreten Python betiği `docs/assets/` içindedir.
+
+Beş notebook'a öğretici Markdown açıklamaları ve dokümantasyon bağlantıları eklenmiştir. 04'te örnek sırasını koruyan hs geçiş kontrolü, ilk hs=0 ve HPT/LPT sağlık parametreleri karşılaştırması vardır. 05'te mevcut ham okuma döngüsüne NaN/±inf ayrımı eklenmiş; 47 değişkenlik kalite tablosu, normal/anormal ölçüm ve uçuş dağılımları, iki düzeyde RUL histogramları ve motor karşılaştırmaları hazırlanmıştır. Karma hs uçuşları tek sınıfa zorlanmaz. Sayısal HDF5 dizileri için Python None uygulanamaz. Sensör seçiminin tek çıktı alanını yenilemesi ve hücre tekrarında eski callback'in kaldırılması sağlanmıştır; normalize yaşam paneli onay kutusuyla açılıp kapanır.
+
+Gerçek dev verisiyle doğrulama: 5.263.447 ölçüm/446 uçuş/6 motor; 47 değişkende NaN veya sonsuz değer yoktur. RUL bütün uçuşlarda sabit, hs uçuş içinde sabittir. İlk hs=0 Motor 16'da cycle 16, diğer beş motorda cycle 17'dir; bu olay tam duruş/EOL anlamına gelmez. Sonuçlar veri eleme veya sensör seçimi kararı değildir.
+
+### Doğrulamanın kapsamı
+
+Yeni 04/05 analizleri gerçek HDF5 verisinden `.venv` Jupyter çekirdeğinde çalıştırıldı; yeni tablo/grafikler ve widget callback kontrolleri geçti. Beş paylaşım notebook'u için format/sözdizimi, merkezi metadata, dokümantasyon dosya bağlantıları ve üç çalışma dizininden taşınabilir yol çözümlemesi kontrol edildi. Yerel veri `N_CMAPSS_H5` ile salt okunur açıldı; veri dosyası kopyalanmadı.
+
+**Beş paylaşım notebook'unun yeni depo konumunda tam uçtan uca yeniden çalıştırma testi henüz yapılmadı.** Sıfırdan bağımlılık kurulumu da ayrıca test edilmedi. Paylaşılan notebook'ların kayıtlı çıktıları temizdir; gerçek veriden doğrulanan bulgular Markdown notlarında yer alır.
