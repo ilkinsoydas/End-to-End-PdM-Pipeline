@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "source": {
+    "paper": "https://doi.org/10.3390/data6010005",
+    "tables": "Tables 4–8; birimler aynı kaynakla korunur",
+    "flow_unit": "pps ve lbm/s eşdeğer kütlesel debi gösterimleri; sayısal veri dönüştürülmez"
+  },
+  "axis_labels": {
+    "sample_index": "Uçuş içindeki ölçüm sırası (saniye değil)",
+    "cycle": "Uçuş döngüsü (cycle)",
+    "RUL": "Kalan uçuş döngüsü (RUL)",
+    "life_progress": "Normalize yaşam ilerlemesi (0–1, boyutsuz; yalnızca görsel karşılaştırma)",
+    "health": "Boyutsuz iç sağlık değiştiricisi\n(yüzde kayıp değil)",
+    "motor": "Motor ID (etiket)",
+    "samples": "Ölçüm sayısı (adet)",
+    "flights": "Uçuş sayısı (adet)"
+  },
+  "variables": {
+    "unit": {
+      "english": "Engine unit identifier",
+      "turkish": "Motor kimliği",
+      "unit": "etiket",
+      "compact_unit": "etiket",
+      "group": "A",
+      "region": "Motorun bütünü",
+      "meaning": "Aynı motorun satırlarını ilişkilendirir. 2 ve 20 sayıları sağlık sıralaması değildir; kimlik ezberlenmesi genellemeyi bozabilir.",
+      "note": ""
+    },
+    "cycle": {
+      "english": "Flight cycle number",
+      "turkish": "Uçuş döngüsü numarası",
+      "unit": "uçuş döngüsü",
+      "compact_unit": "uçuş döngüsü",
+      "group": "A",
+      "region": "Kullanım geçmişi",
+      "meaning": "Motorun kaçıncı uçuşu olduğunu gösterir. Bir uçuş birçok örnek içerir; farklı motorlarda cycle 40 aynı sağlık/RUL değildir.",
+      "note": ""
+    },
+    "Fc": {
+      "english": "Flight class",
+      "turkish": "Uçuş sınıfı",
+      "unit": "etiket",
+      "compact_unit": "etiket",
+      "group": "A",
+      "region": "Görev/uçuş profili",
+      "meaning": "1 kısa, 2 orta, 3 uzun sınıftır. Arıza etiketi veya uçuş içi tırmanış/seyir fazı değildir.",
+      "note": ""
+    },
+    "hs": {
+      "english": "Health state label",
+      "turkish": "Sağlık durumu etiketi",
+      "unit": "etiket",
+      "compact_unit": "etiket",
+      "group": "A",
+      "region": "Bozulma rejimi",
+      "meaning": "1 normal, 0 anormal bozulma dönemi. 0 anlık duruş veya yaşam sonu demek değildir; doğrudan ölçülen sensör değildir.",
+      "note": ""
+    },
+    "alt": {
+      "english": "Flight altitude",
+      "turkish": "Uçuş irtifası",
+      "unit": "ft",
+      "compact_unit": "ft",
+      "group": "W",
+      "region": "Uçuş ortamı / giriş",
+      "meaning": "Atmosfer ve motor çalışma noktasını etkiler; tek başına motor sağlığı göstergesi değildir.",
+      "note": ""
+    },
+    "Mach": {
+      "english": "Flight Mach number",
+      "turkish": "Uçuş Mach sayısı",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "W",
+      "region": "Uçuş hızı / giriş",
+      "meaning": "Hızın yerel ses hızına oranı. 0,7 sabit bir km/saat değeri değildir; ses hızı ortamla değişir.",
+      "note": ""
+    },
+    "TRA": {
+      "english": "Throttle-resolver angle",
+      "turkish": "Gaz kolu / güç talebi göstergesi",
+      "unit": "%",
+      "compact_unit": "%",
+      "group": "W",
+      "region": "Güç yönetimi / kumanda",
+      "meaning": "Adında angle olsa da Table 4 yüzde verir; derece yazmayın. Doğrudan Newton cinsinden itki değildir.",
+      "note": "Table 4 yüzde verir; angle adına rağmen derece kullanılmaz."
+    },
+    "T2": {
+      "english": "Fan-inlet total temperature",
+      "turkish": "Fan giriş toplam sıcaklığı",
+      "unit": "°R",
+      "compact_unit": "°R",
+      "group": "W",
+      "region": "Fan girişi",
+      "meaning": "Giriş akışının toplam sıcaklığı; uçuş/ortam koşulu. X_s içindeki T24 gibi iç istasyon sıcaklıklarından ayrı W değişkenidir.",
+      "note": ""
+    },
+    "T24": {
+      "english": "Low-pressure-compressor discharge total temperature",
+      "turkish": "LPC çıkış toplam sıcaklığı",
+      "unit": "°R",
+      "compact_unit": "°R",
+      "group": "X_s",
+      "region": "LPC çıkışı",
+      "meaning": "Sıkıştırma sonrası termal durum. T2 ve koşullarla birlikte okunur; tek başına verim hesabı değildir.",
+      "note": ""
+    },
+    "T30": {
+      "english": "High-pressure-compressor discharge total temperature",
+      "turkish": "HPC çıkış toplam sıcaklığı",
+      "unit": "°R",
+      "compact_unit": "°R",
+      "group": "X_s",
+      "region": "HPC çıkışı",
+      "meaning": "Yanma öncesi sıkıştırılmış havanın sıcaklığı. Yük ve sıkıştırma durumundan etkilenir.",
+      "note": ""
+    },
+    "T48": {
+      "english": "High-pressure-turbine discharge total temperature",
+      "turkish": "HPT çıkış toplam sıcaklığı",
+      "unit": "°R",
+      "compact_unit": "°R",
+      "group": "X_s",
+      "region": "HPT çıkışı",
+      "meaning": "Türbinde enerji çekilmesi sonrası termal durum. HI tanımında referans koşullardaki T48 kullanılır; ham T48 doğrudan HI değildir.",
+      "note": ""
+    },
+    "T50": {
+      "english": "Low-pressure-turbine discharge total temperature",
+      "turkish": "LPT çıkış toplam sıcaklığı",
+      "unit": "°R",
+      "compact_unit": "°R",
+      "group": "X_s",
+      "region": "LPT çıkışı",
+      "meaning": "Türbin zinciri sonundaki termal durum; T48 ile farklı konumdadır.",
+      "note": ""
+    },
+    "P15": {
+      "english": "Bypass-duct total pressure",
+      "turkish": "Bypass kanalı toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_s",
+      "region": "Fan bypass kanalı",
+      "meaning": "Çekirdeği dolaşan akışın basıncı; HPC basıncıyla aynı yer değildir.",
+      "note": ""
+    },
+    "P2": {
+      "english": "Fan-inlet total pressure",
+      "turkish": "Fan giriş toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_s",
+      "region": "Fan girişi",
+      "meaning": "İrtifa/Mach etkisini taşır; mutlak toplam basınçtır, gösterge basıncı değil.",
+      "note": ""
+    },
+    "P21": {
+      "english": "Fan-discharge total pressure",
+      "turkish": "Fan çıkış toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_s",
+      "region": "Fan çıkışı",
+      "meaning": "Fan sonrası akış durumu. P2 ile birlikte incelenebilir; kendisi hesaplanmış basınç oranı değildir.",
+      "note": ""
+    },
+    "P24": {
+      "english": "Low-pressure-compressor discharge total pressure",
+      "turkish": "LPC çıkış toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_s",
+      "region": "LPC çıkışı",
+      "meaning": "T24 ile aynı bileşen çıkışının farklı fiziksel büyüklüğünü betimler.",
+      "note": ""
+    },
+    "Ps30": {
+      "english": "High-pressure-compressor discharge static pressure",
+      "turkish": "HPC çıkış statik basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_s",
+      "region": "HPC çıkışı",
+      "meaning": "Yerel statik mutlak basınç. Sanal P30 toplam basınçtır; birbirinin yerine kullanılmaz.",
+      "note": ""
+    },
+    "P40": {
+      "english": "Combustor-discharge total pressure",
+      "turkish": "Yanma odası çıkışı / HPT girişi toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_s",
+      "region": "Combustor çıkışı / HPT girişi",
+      "meaning": "Yanma sonrası basınç durumu. Yanma sıcaklığı artırsa da basınç mutlaka artmaz.",
+      "note": ""
+    },
+    "P50": {
+      "english": "Low-pressure-turbine discharge total pressure",
+      "turkish": "LPT çıkış toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_s",
+      "region": "LPT çıkışı",
+      "meaning": "Türbin sonrası basınç; çıkış akışı ve ortam koşullarıyla birlikte yorumlanır.",
+      "note": ""
+    },
+    "Nf": {
+      "english": "Physical fan rotational speed",
+      "turkish": "Fanın fiziksel dönüş hızı",
+      "unit": "rpm",
+      "compact_unit": "rpm",
+      "group": "X_s",
+      "region": "Fan / düşük basınç mili",
+      "meaning": "Fiziksel mil hızı; sıcaklıkla düzeltilmiş hız olduğu varsayılmaz. Güç talebine bağlıdır.",
+      "note": ""
+    },
+    "Nc": {
+      "english": "Physical core rotational speed",
+      "turkish": "Çekirdeğin fiziksel dönüş hızı",
+      "unit": "rpm",
+      "compact_unit": "rpm",
+      "group": "X_s",
+      "region": "Yüksek basınç / çekirdek mili",
+      "meaning": "Nf ile aynı mil değildir; iki hızın ölçekleri farklı olabilir.",
+      "note": ""
+    },
+    "Wf": {
+      "english": "Fuel mass-flow rate",
+      "turkish": "Yakıt kütlesel debisi",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_s",
+      "region": "Yakıt beslemesi / combustor",
+      "meaning": "Birim zamanda verilen yakıt kütlesi. Hava debisi veya yakıt/hava oranı değildir; yük/komut etkisi içerir.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "T40": {
+      "english": "Combustor-discharge total temperature",
+      "turkish": "Yanma odası çıkış toplam sıcaklığı",
+      "unit": "°R",
+      "compact_unit": "°R",
+      "group": "X_v",
+      "region": "Combustor çıkışı / HPT girişi",
+      "meaning": "İç model sıcaklık çıktısı. T48 sonraki HPT çıkışıdır; aynı yer değildir.",
+      "note": ""
+    },
+    "P30": {
+      "english": "High-pressure-compressor discharge total pressure",
+      "turkish": "HPC çıkış toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_v",
+      "region": "HPC çıkışı",
+      "meaning": "Sanal toplam basınç. Fiziksel Ps30 statik basınçtır; eşit varsayılmaz.",
+      "note": ""
+    },
+    "P45": {
+      "english": "High-pressure-turbine discharge total pressure",
+      "turkish": "HPT çıkış toplam basıncı",
+      "unit": "psia",
+      "compact_unit": "psia",
+      "group": "X_v",
+      "region": "HPT çıkışı",
+      "meaning": "Table 6'nın verdiği konum. T48 ile istasyon numarasının aynı olması gerekmez; isimden yeni konum türetilmez.",
+      "note": ""
+    },
+    "W21": {
+      "english": "Fan mass-flow rate",
+      "turkish": "Fan kütlesel debisi",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_v",
+      "region": "Fan",
+      "meaning": "Fan akışının model çıktısı. Çekirdek debileriyle aynı büyüklükte olmak zorunda değildir.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "W22": {
+      "english": "Low-pressure-compressor outlet mass-flow rate",
+      "turkish": "LPC çıkış kütlesel debisi",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_v",
+      "region": "LPC çıkışı (Table 6)",
+      "meaning": "Basılı kaynak açıklaması esas alınır. W25 ile ilişkili olsa da aynı kolon değildir; istasyon adından farklı konum varsaymayın.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "W25": {
+      "english": "High-pressure-compressor inlet mass-flow rate",
+      "turkish": "HPC giriş kütlesel debisi",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_v",
+      "region": "HPC girişi",
+      "meaning": "Kompresöre giren model akışı. Bleed/akış yolları nedeniyle diğer debilerle eşit varsayılmaz.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "W31": {
+      "english": "High-pressure-turbine cooling bleed mass-flow rate, W31 channel",
+      "turkish": "HPT soğutma bleed debisi, W31",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_v",
+      "region": "HPT soğutması",
+      "meaning": "Soğutma için ayrılan akış. Kaynak W31/W32 için aynı genel açıklamayı verir; özel kademe/rotor ataması doğrulanmamıştır.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "W32": {
+      "english": "High-pressure-turbine cooling bleed mass-flow rate, W32 channel",
+      "turkish": "HPT soğutma bleed debisi, W32",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_v",
+      "region": "HPT soğutması",
+      "meaning": "Ayrı bir model kanalıdır. Tam devre/kademe ataması için model dokümanı gerekir; isimden uydurulmaz.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "W48": {
+      "english": "High-pressure-turbine outlet mass-flow rate",
+      "turkish": "HPT çıkış kütlesel debisi",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_v",
+      "region": "HPT çıkışı",
+      "meaning": "Türbin gaz akışı. Yanma/soğutma yolları nedeniyle önceki hava debisinin kopyası sayılmaz.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "W50": {
+      "english": "Low-pressure-turbine outlet mass-flow rate",
+      "turkish": "LPT çıkış kütlesel debisi",
+      "unit": "lbm/s",
+      "compact_unit": "lbm/s",
+      "group": "X_v",
+      "region": "LPT çıkışı",
+      "meaning": "Türbin sonrası model akışı. Kütlesel ve hacimsel debi aynı kavram değildir.",
+      "note": "Kaynakta pps veya lbm/s; pps pound-mass per second olarak kullanılır."
+    },
+    "SmFan": {
+      "english": "Fan stall margin",
+      "turkish": "Fan stall marjı",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "X_v",
+      "region": "Fan kararlılık payı",
+      "meaning": "Kararlı çalışma sınırına ilişkin model rezervi. Birimi kaynakta yüzde verilmez; fan verimi veya HI değildir.",
+      "note": "Table 6 birimi —; sağlık/verim yüzdesi olarak yorumlanmaz."
+    },
+    "SmLPC": {
+      "english": "Low-pressure-compressor stall margin",
+      "turkish": "LPC stall marjı",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "X_v",
+      "region": "LPC kararlılık payı",
+      "meaning": "Koşullara bağlı sanal çıktı. Ham değişim tek başına bozulma kanıtı değildir.",
+      "note": "Table 6 birimi —; sağlık/verim yüzdesi olarak yorumlanmaz."
+    },
+    "SmHPC": {
+      "english": "High-pressure-compressor stall margin",
+      "turkish": "HPC stall marjı",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "X_v",
+      "region": "HPC kararlılık payı",
+      "meaning": "Yüksek basınç kompresörü rezervi. HI modelinde referans koşullarda değerlendirilir.",
+      "note": "Table 6 birimi —; sağlık/verim yüzdesi olarak yorumlanmaz."
+    },
+    "phi": {
+      "english": "Fuel-flow-to-Ps30 ratio (paper definition)",
+      "turkish": "Yakıt debisinin Ps30'a oranı (makale tanımı)",
+      "unit": "pps/psi; dosya ölçeği belirsiz",
+      "compact_unit": "pps/psi*",
+      "group": "X_v",
+      "region": "Yakıt / HPC çıkış basıncı ilişkisi",
+      "meaning": "Boyutsuz fuel–air ratio veya eşdeğerlik oranı diye adlandırmayın. Yerel ilk satır yalın oranla uyuşmuyor; aşağıdaki notu okuyun.",
+      "note": "Table 6 oran tanımı/birimi korunur; yerel yalın Wf/Ps30 ile uyuşmazlık çözülmemiştir."
+    },
+    "fan_eff_mod": {
+      "english": "Fan efficiency modifier",
+      "turkish": "Fan verim değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "Fan",
+      "meaning": "Fan verim davranışının iç ayarı; ölçülmüş verim değil. Sıfır, bu parametrede değişim uygulanmadığını belirtir; bütün motor sağlıklı demek değildir.",
+      "note": ""
+    },
+    "fan_flow_mod": {
+      "english": "Fan flow-capacity modifier",
+      "turkish": "Fan akış kapasitesi değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "Fan",
+      "meaning": "Fan akış kapasitesinin iç ayarı; W21 debisi değil. Nominal modele göre yorumlanır.",
+      "note": ""
+    },
+    "LPC_eff_mod": {
+      "english": "Low-pressure-compressor efficiency modifier",
+      "turkish": "LPC verim değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "LPC",
+      "meaning": "LPC verim davranışının iç ayarı. İşareti/ölçeği yüzde kayıp varsayımıyla değiştirilmez.",
+      "note": ""
+    },
+    "LPC_flow_mod": {
+      "english": "Low-pressure-compressor flow-capacity modifier",
+      "turkish": "LPC akış kapasitesi değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "LPC",
+      "meaning": "LPC akış kapasitesinin iç ayarı; W22 gibi lbm/s sinyali değildir.",
+      "note": ""
+    },
+    "HPC_eff_mod": {
+      "english": "High-pressure-compressor efficiency modifier",
+      "turkish": "HPC verim değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "HPC",
+      "meaning": "HPC verim davranışının iç ayarı. Tek başına gerçek motor verimini vermez.",
+      "note": ""
+    },
+    "HPC_flow_mod": {
+      "english": "High-pressure-compressor flow-capacity modifier",
+      "turkish": "HPC akış kapasitesi değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "HPC",
+      "meaning": "HPC akış kapasitesinin iç ayarı; W25 ile farklı tür değişkendir.",
+      "note": ""
+    },
+    "HPT_eff_mod": {
+      "english": "High-pressure-turbine efficiency modifier",
+      "turkish": "HPT verim değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "HPT",
+      "meaning": "HPT verim davranışının iç ayarı. Başlangıç aşınması nedeniyle ilk uçuşta sıfırdan farklı olabilir; ilk ≠0 arıza başlangıcı değildir.",
+      "note": ""
+    },
+    "HPT_flow_mod": {
+      "english": "High-pressure-turbine flow-capacity modifier",
+      "turkish": "HPT akış kapasitesi değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "HPT",
+      "meaning": "HPT akış kapasitesinin iç ayarı; W48 debisinden ayrı. Sıfır olması diğer sağlık parametrelerinin de sıfır olduğu anlamına gelmez.",
+      "note": ""
+    },
+    "LPT_eff_mod": {
+      "english": "Low-pressure-turbine efficiency modifier",
+      "turkish": "LPT verim değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "LPT",
+      "meaning": "LPT verim davranışının iç ayarı. Eğrisi açıklayıcı model bilgisidir, doğrudan ölçülebilir sensör değildir.",
+      "note": ""
+    },
+    "LPT_flow_mod": {
+      "english": "Low-pressure-turbine flow-capacity modifier (symbol-based interpretation)",
+      "turkish": "LPT akış kapasitesi değiştiricisi",
+      "unit": "boyutsuz",
+      "compact_unit": "boyutsuz",
+      "group": "T",
+      "region": "LPT; basılı açıklama çelişkisine bakın",
+      "meaning": "Sembol/parametre ailesine dayalı yorum. Table 7 açıklamasında HPT yazılmıştır; bu çelişki aşağıda açıkça kaydedilir.",
+      "note": "Table 7 sembol LPT, basılı açıklama HPT; LPT yorumu sembol/parametre ailesine dayanır."
+    },
+    "RUL": {
+      "english": "Remaining useful life",
+      "turkish": "Kalan faydalı ömür",
+      "unit": "uçuş döngüsü",
+      "compact_unit": "uçuş döngüsü",
+      "group": "Y",
+      "region": "Motorun kalan operasyonel ömrü",
+      "meaning": "Y_dev hedefidir; Y_var yoktur. DS02 dev'de aynı uçuş içinde sabittir. Motor 2 ilk uçuş RUL=74, son uçuş RUL=0. Saniye değil kalan uçuş sayısıdır; hedefi kendi girdisi yapmak sızıntıdır.",
+      "note": ""
+    },
+    "sample_index": {
+      "english": "Within-flight sample order",
+      "turkish": "Uçuş içindeki ölçüm sırası",
+      "unit": "örnek sırası; saniye değil",
+      "compact_unit": "örnek",
+      "group": "derived"
+    },
+    "life_progress": {
+      "english": "Normalized lifecycle progress",
+      "turkish": "Normalize yaşam ilerlemesi",
+      "unit": "0–1, boyutsuz; yalnızca görsel karşılaştırma",
+      "compact_unit": "0–1",
+      "group": "derived"
+    }
+  }
+}
