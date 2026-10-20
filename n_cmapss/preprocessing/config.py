@@ -10,3 +10,5 @@ STRIDE = 1024
 
 INPUT_DATASETS = ("W_dev", "X_s_dev")
 REQUIRED_DATASETS = ("A_dev", "W_dev", "X_s_dev", "Y_dev")
+
+FEATURE_NAME_DATASETS = ("W_var", "X_s_var")

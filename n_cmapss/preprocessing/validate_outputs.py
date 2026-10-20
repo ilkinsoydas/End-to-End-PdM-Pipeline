@@ -6,6 +6,10 @@ import json
 
 from .config import DATA_PATH, OUTPUT_DIR, WINDOW_SIZE
 from pathlib import Path
+from .data_loader import (
+    NCmapssDataLoader,
+    load_window_metadata,
+)
 
 WINDOW_METADATA_PATH = OUTPUT_DIR / "window_metadata.csv"
 SPLIT_FOLDS_PATH = OUTPUT_DIR / "split_folds.json"
@@ -225,8 +229,53 @@ def validate_split_folds() -> None:
     print(f"Development units: {sorted(dev_units)}")
     print(f"Official test units: {sorted(test_units)}")
     
+def validate_data_loader() -> None:
+    windows = load_window_metadata()
+    windows_checked = 0
+
+    with NCmapssDataLoader() as loader:
+        for features, targets, records in loader.iter_batches(
+            windows,
+            batch_size=64,
+        ):
+            if features.shape[1:] != (WINDOW_SIZE, 18):
+                raise ValueError(
+                    f"Invalid batch feature shape: {features.shape}"
+                )
+
+            if features.dtype != np.float32:
+                raise ValueError(
+                    f"Invalid feature dtype: {features.dtype}"
+                )
+
+            if targets.dtype != np.float32:
+                raise ValueError(
+                    f"Invalid target dtype: {targets.dtype}"
+                )
+
+            if not np.isfinite(features).all():
+                raise ValueError(
+                    "Features contain NaN or infinite values."
+                )
+
+            if not np.isfinite(targets).all():
+                raise ValueError(
+                    "Targets contain NaN or infinite values."
+                )
+
+            windows_checked += len(records)
+
+    if windows_checked != len(windows):
+        raise ValueError(
+            "Not all metadata windows were loaded."
+        )
+
+    print("\nData loader validation passed.")
+    print(f"Windows loaded: {windows_checked:,}")
+    
 if __name__ == "__main__":
     validate_output_files()
     validate_window_metadata()
     validate_windows_against_hdf5()
     validate_split_folds()
+    validate_data_loader()
