@@ -1,0 +1,17 @@
+{
+  "fold": 5,
+  "seed": 42,
+  "validation_windows": 890,
+  "training_windows": 4380,
+  "best_epoch": 50,
+  "epochs_run": 50,
+  "training_seconds": 166.72401912504574,
+  "baseline_validation_mae": 18.214696884155273,
+  "baseline_validation_rmse": 21.04385757446289,
+  "cnn_validation_mae": 2.487434148788452,
+  "cnn_validation_rmse": 3.4649757265504033,
+  "cnn_train_mae": 5.11314058303833,
+  "cnn_train_rmse": 7.231793661954951,
+  "evaluation_level": "window",
+  "split": "development_validation"
+}

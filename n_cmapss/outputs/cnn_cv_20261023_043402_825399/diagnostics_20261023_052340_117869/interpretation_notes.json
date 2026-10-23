@@ -1,0 +1,13 @@
+{
+  "purpose": "Descriptive diagnosis; no CNN weights, predictions, or baseline files modified.",
+  "aggregation": "Exact model windows -> arithmetic window means -> equal-window flight means. Not full-flight means.",
+  "T_parameters": "Diagnostic only, never CNN inputs.",
+  "condition_residuals": "Sensor minus quadratic Ridge prediction from W; fit on other development motors, all life stages. Fixed alpha=10. Not a causal correction or a healthy baseline.",
+  "limitations": [
+    "Time and RUL confound correlations; adjacent flights are dependent.",
+    "No p-values or causal claims. Low endpoint error does not establish fault detection performance.",
+    "Marginal range coverage does not guarantee joint operating-condition overlap.",
+    "Window means lose within-window dynamics used by CNN.",
+    "Validation motors were used for epoch selection; this is not independent test performance."
+  ]
+}

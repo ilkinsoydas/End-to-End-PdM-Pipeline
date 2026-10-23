@@ -1,0 +1,28 @@
+{
+  "completed_folds": [
+    5
+  ],
+  "requested_folds": [
+    5
+  ],
+  "evaluation": "development_validation",
+  "std_definition": "sample standard deviation across motors (ddof=1)",
+  "cnn_validation_mae": {
+    "macro_mean": 2.2858211994171143,
+    "std": null
+  },
+  "cnn_validation_rmse": {
+    "macro_mean": 3.149030075913272,
+    "std": null
+  },
+  "baseline_validation_mae": {
+    "macro_mean": 18.214696884155273,
+    "std": null
+  },
+  "baseline_validation_rmse": {
+    "macro_mean": 21.04385757446289,
+    "std": null
+  },
+  "pooled_window_mae": 2.2858211994171143,
+  "pooled_window_rmse": 3.149030075913272
+}

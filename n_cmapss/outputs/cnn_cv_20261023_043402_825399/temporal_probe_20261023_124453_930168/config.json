@@ -1,0 +1,17 @@
+{
+  "folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "repeats": 5,
+  "seed": 2026,
+  "batch_size": 64,
+  "block_size": 16,
+  "device": "cpu",
+  "retraining": false,
+  "interpretation": "Frozen model sensitivity, not proof that temporal information is necessary. Synthetic input shift possible."
+}

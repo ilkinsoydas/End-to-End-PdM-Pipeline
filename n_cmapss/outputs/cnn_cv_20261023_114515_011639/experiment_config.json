@@ -1,0 +1,14 @@
+{
+  "folds": [
+    5
+  ],
+  "seed": 42,
+  "max_epochs": 150,
+  "patience": 150,
+  "learning_rate": 0.001,
+  "batch_size": 64,
+  "device": "cpu",
+  "evaluation": "development_validation",
+  "epoch_selection": "minimum held-out motor validation MSE",
+  "note": "Not an independent test estimate; validation selects epoch."
+}

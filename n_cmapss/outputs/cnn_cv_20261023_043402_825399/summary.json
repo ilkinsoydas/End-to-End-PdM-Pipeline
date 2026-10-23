@@ -1,0 +1,38 @@
+{
+  "completed_folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "requested_folds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "evaluation": "development_validation",
+  "std_definition": "sample standard deviation across motors (ddof=1)",
+  "cnn_validation_mae": {
+    "macro_mean": 4.987876216570537,
+    "std": 1.4067577865220078
+  },
+  "cnn_validation_rmse": {
+    "macro_mean": 6.820449050972407,
+    "std": 2.065256953902012
+  },
+  "baseline_validation_mae": {
+    "macro_mean": 19.06757386525472,
+    "std": 2.5286733341846825
+  },
+  "baseline_validation_rmse": {
+    "macro_mean": 22.146411259969074,
+    "std": 2.9177632878585493
+  },
+  "pooled_window_mae": 5.004576742309773,
+  "pooled_window_rmse": 7.162942986823799
+}
