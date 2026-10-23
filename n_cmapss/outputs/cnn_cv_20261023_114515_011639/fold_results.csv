@@ -1,2 +1,0 @@
-fold,seed,validation_windows,training_windows,best_epoch,epochs_run,training_seconds,baseline_validation_mae,baseline_validation_rmse,cnn_validation_mae,cnn_validation_rmse,cnn_train_mae,cnn_train_rmse,evaluation_level,split
-5,42,890,4380,90,150,567.9954153749859,18.214696884155273,21.04385757446289,2.2858211994171143,3.149030075913272,4.951379776000977,7.0604412487776855,window,development_validation

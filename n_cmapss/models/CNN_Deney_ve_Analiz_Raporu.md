@@ -48,15 +48,15 @@ Birleşik pencere MAE: 5,005; RMSE: 7,163. Referans ortalama RMSE'sine göre aza
 
 ### İlk fold: öğrenme ve tahmin görselleri
 
-![İlk fold öğrenme eğrileri](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fold_ogrenme.png)
+![İlk fold öğrenme eğrileri](./CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fold_ogrenme.png)
 
 İlk epoch'larda hata hızla düşer; sonraki kazançlar küçülür. En iyi epoch 29, durma epoch'u 37'dir. Eğitim RMSE'si güncellemeler sırasında, doğrulama RMSE'si epoch sonunda hesaplanır.
 
-![İlk fold gerçek ve tahmin edilen RUL](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fold_tahmin.png)
+![İlk fold gerçek ve tahmin edilen RUL](./CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fold_tahmin.png)
 
 Eşitlik çizgisinin üstü fazla kalan ömür tahmini, altı eksik tahmindir. Noktalar motor değil, penceredir.
 
-![Motor 2 uçuş bazında tahmin](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fold_ucus.png)
+![Motor 2 uçuş bazında tahmin](./CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fold_ucus.png)
 
 Uçuş bazında MAE 4,540, RMSE 5,655'tir. Pencere tahminleri uçuş içinde ortalanmıştır; bu yeni bir eğitim sonucu değildir.
 
@@ -73,7 +73,7 @@ Altı motorun her birinde 0–10 aralığı en düşük MAE'ye sahiptir. Bu, son
 
 Motor 5 ve 10 yüksek RUL'da eksik tahmin; motor 2, 16 ve 20 orta RUL'da fazla tahmin gösterir. Bütün tahminlere sabit düzeltme uygulamak uygun değildir.
 
-![Motor ve ömür aralığına göre hata](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/hata_haritasi.png)
+![Motor ve ömür aralığına göre hata](./CNN_Deney_ve_Analiz_Raporu/gorseller/hata_haritasi.png)
 
 ## 6. Aynı kalan ömür, farklı sağlık durumları
 
@@ -214,71 +214,71 @@ Her grafikte sensörler aynı tahmin pencereleri üzerinden özetlenmiştir. Sa�
 
 Orta RUL’da fazla tahmin. Geç dönemde HPT değişimi hızlanırken hata azalıyor.
 
-![Motor 2: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_2_ozet.png)
+![Motor 2: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_2_ozet.png)
 
-![Motor 2: Fiziksel sensörlerin uçuş bazında değişimi](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_2_sensorler.png)
+![Motor 2: Fiziksel sensörlerin uçuş bazında değişimi](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_2_sensorler.png)
 
-![Motor 2: Çalışma koşullarına göre beklenen değerden sapmalar](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_2_sapmalar.png)
+![Motor 2: Çalışma koşullarına göre beklenen değerden sapmalar](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_2_sapmalar.png)
 
 
 ### Motor 5
 
 Yüksek RUL’da belirgin eksik tahmin. Orta ömürde tahminler gerçeğe yaklaşıyor.
 
-![Motor 5: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_5_ozet.png)
+![Motor 5: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_5_ozet.png)
 
-![Motor 5: Fiziksel sensörlerin uçuş bazında değişimi](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_5_sensorler.png)
+![Motor 5: Fiziksel sensörlerin uçuş bazında değişimi](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_5_sensorler.png)
 
-![Motor 5: Çalışma koşullarına göre beklenen değerden sapmalar](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_5_sapmalar.png)
+![Motor 5: Çalışma koşullarına göre beklenen değerden sapmalar](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_5_sapmalar.png)
 
 
 ### Motor 10
 
 Yüksek RUL’da eksik tahmin. Son ömür aralığında hata daha düşük.
 
-![Motor 10: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_10_ozet.png)
+![Motor 10: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_10_ozet.png)
 
-![Motor 10: Fiziksel sensörlerin uçuş bazında değişimi](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_10_sensorler.png)
+![Motor 10: Fiziksel sensörlerin uçuş bazında değişimi](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_10_sensorler.png)
 
-![Motor 10: Çalışma koşullarına göre beklenen değerden sapmalar](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_10_sapmalar.png)
+![Motor 10: Çalışma koşullarına göre beklenen değerden sapmalar](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_10_sapmalar.png)
 
 
 ### Motor 16
 
 Orta RUL’da fazla tahmin; HPT ve LPT parametrelerinde birlikte değişimler görülüyor.
 
-![Motor 16: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_16_ozet.png)
+![Motor 16: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_16_ozet.png)
 
-![Motor 16: Fiziksel sensörlerin uçuş bazında değişimi](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_16_sensorler.png)
+![Motor 16: Fiziksel sensörlerin uçuş bazında değişimi](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_16_sensorler.png)
 
-![Motor 16: Çalışma koşullarına göre beklenen değerden sapmalar](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_16_sapmalar.png)
+![Motor 16: Çalışma koşullarına göre beklenen değerden sapmalar](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_16_sapmalar.png)
 
 
 ### Motor 18
 
 İlk deneyde en düşük genel hata. Bu bölümdeki grafikler 50 epoch referansına aittir.
 
-![Motor 18: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_18_ozet.png)
+![Motor 18: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_18_ozet.png)
 
-![Motor 18: Fiziksel sensörlerin uçuş bazında değişimi](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_18_sensorler.png)
+![Motor 18: Fiziksel sensörlerin uçuş bazında değişimi](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_18_sensorler.png)
 
-![Motor 18: Çalışma koşullarına göre beklenen değerden sapmalar](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_18_sapmalar.png)
+![Motor 18: Çalışma koşullarına göre beklenen değerden sapmalar](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_18_sapmalar.png)
 
 
 ### Motor 20
 
 Orta RUL’da güçlü fazla tahmin; basınç ve devir sapmaları motor 2’den farklı davranıyor.
 
-![Motor 20: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_20_ozet.png)
+![Motor 20: Tahmin, hata, çalışma koşulları ve sağlık parametreleri](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_20_ozet.png)
 
-![Motor 20: Fiziksel sensörlerin uçuş bazında değişimi](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_20_sensorler.png)
+![Motor 20: Fiziksel sensörlerin uçuş bazında değişimi](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_20_sensorler.png)
 
-![Motor 20: Çalışma koşullarına göre beklenen değerden sapmalar](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/motor_20_sapmalar.png)
+![Motor 20: Çalışma koşullarına göre beklenen değerden sapmalar](./CNN_Deney_ve_Analiz_Raporu/gorseller/motor_20_sapmalar.png)
 
 
 ## 17. İlk fiziksel grafiğin nasıl yorumlanması gerekiyor?
 
-![İlk fiziksel inceleme](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fiziksel_inceleme.png)
+![İlk fiziksel inceleme](./CNN_Deney_ve_Analiz_Raporu/gorseller/ilk_fiziksel_inceleme.png)
 
 **Başlıklardaki neden–sonuç ifadeleri doğrulanmış sonuç değildir.** Bu görsel ilk keşif aşamasını temsil eder. HPT parametresinin düşüşü görülüyor; ham Wf serisinde sürekli artış yok. “İtkiyi karşılamak için yakıt arttı” ve “fazla yakıt sıcaklığı artırdı” iddiaları yalnızca bu çizgilerden çıkarılamaz. Sunumda koşullara göre sensör sapması grafiklerine öncelik verilmeli. Bu ilk grafiğin hangi satırları özetlediği kodu görülmeden doğrulanmadığından, sonraki pencere eşleştirilmiş grafiklerle sayısal olarak aynı kabul edilmemelidir.
 
@@ -328,7 +328,7 @@ Bu koşuda belirgin ve kalıcı bir doğrulama kötüleşmesi görülmüyor. Eğ
 
 ### Grafik
 
-![50 ve 150 epoch karşılaştırması](../../../../Downloads/CNN_Deney_ve_Analiz_Raporu/gorseller/fold5_50_vs_150.png)
+![50 ve 150 epoch karşılaştırması](.CNN_Deney_ve_Analiz_Raporu/gorseller/fold5_50_vs_150.png)
 
 Sol üst: bütün eğitim seyri. Sağ üst: 30. epoch sonrası doğrulama hatası ve o ana kadarki en iyi değer. Sol alt: eski ve yeni en iyi checkpoint'in uçuş başına ortalama tahmini. Sağ alt: pencere bazında RUL aralığı MAE karşılaştırması. Eğitim eğrisindeki değerler ağırlık güncellemeleri sırasında biriktirilir; sabit modelin son eğitim metriklerinden farklıdır.
 

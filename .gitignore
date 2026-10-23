@@ -25,6 +25,7 @@ n_cmapss/data/*
 *.tmp
 *.temp
 ~$*
+n_cmapss/outputs/
 
 # Processed files and .idea/
 .idea/
