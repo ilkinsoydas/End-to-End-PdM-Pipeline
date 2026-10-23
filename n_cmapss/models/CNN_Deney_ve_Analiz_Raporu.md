@@ -328,7 +328,7 @@ Bu koşuda belirgin ve kalıcı bir doğrulama kötüleşmesi görülmüyor. Eğ
 
 ### Grafik
 
-![50 ve 150 epoch karşılaştırması](.CNN_Deney_ve_Analiz_Raporu/gorseller/fold5_50_vs_150.png)
+![50 ve 150 epoch karşılaştırması](./CNN_Deney_ve_Analiz_Raporu/gorseller/fold5_50_vs_150.png)
 
 Sol üst: bütün eğitim seyri. Sağ üst: 30. epoch sonrası doğrulama hatası ve o ana kadarki en iyi değer. Sol alt: eski ve yeni en iyi checkpoint'in uçuş başına ortalama tahmini. Sağ alt: pencere bazında RUL aralığı MAE karşılaştırması. Eğitim eğrisindeki değerler ağırlık güncellemeleri sırasında biriktirilir; sabit modelin son eğitim metriklerinden farklıdır.
 
