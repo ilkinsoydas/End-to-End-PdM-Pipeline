@@ -146,19 +146,8 @@ Mevcut altı fold ilk CNN referansı olarak korunacaktır. Aday deney: çalışm
 
 Genel MAE/RMSE yanında orta RUL yanlılığı ve düşük RUL'daki fazla tahminler raporlanmalıdır. Resmî test kümesi son değerlendirmeye saklanacaktır.
 
-## 12. Sunum akışı (6–8 dakika)
 
-1. Problem ve sensör girdileri (45 sn).
-2. Pencereleme, motor bazlı ayrım ve CNN (60 sn).
-3. Altı fold sonucu ve referans karşılaştırması (60 sn).
-4. Hata haritası: motorlara göre değişen sorun (60 sn).
-5. Aynı sağlık değeri–farklı RUL örneği (60 sn).
-6. Sensör sapması grafikleri: görülen eğilimler ve sınırları (90 sn).
-7. Bulgular, hipotezler ve kontrollü sonraki deney (45 sn).
-
-Mevcut diagnostic_figures.pdf içinden sayfa 1 hata haritası; sayfa 2 ve 4 motor 2; sayfa 17 ve 19 motor 20 karşılaştırması için kullanılabilir.
-
-## 13. Hocadan gelebilecek sorular
+## 13. Önemli sorular ve cevapları
 
 **Neden test başarısı demiyoruz?** En iyi epoch doğrulama motoruyla seçildi. Sonuçlar geliştirme doğrulamasıdır; bağımsız test değildir.
 
