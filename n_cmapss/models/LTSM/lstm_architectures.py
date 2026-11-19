@@ -6,15 +6,20 @@ from tensorflow.keras.layers import (
     GlobalAveragePooling1D
 )
 
-# 1. Vanilla LSTM
-def build_vanilla_lstm():
+def build_vanilla_lstm(
+    units=64,
+    dropout=0.2,
+    window_size=256,
+    n_features=18
+):
     model = Sequential([
-        Input(shape=(256, 18)),
-        LSTM(64),
-        Dropout(0.2),
+        Input(shape=(window_size, n_features)),
+        LSTM(units),
+        Dropout(dropout),
         Dense(32, activation="relu"),
         Dense(1)
     ])
+
     return model
 
 
