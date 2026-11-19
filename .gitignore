@@ -9,10 +9,13 @@ __pycache__/
 .vscode/
 
 # Machine Learning Models
-models/
+/models/
 *.pkl
 *.h5
 *.joblib
+*.pt
+*.pth
+*.ckpt
 
 # N-CMAPSS collaboration: local environments, data and generated files
 .venv/
@@ -22,6 +25,7 @@ models/
 n_cmapss/data/*
 !n_cmapss/data/.gitkeep
 n_cmapss/outputs/
+n_cmapss/processed/
 *.tmp
 *.temp
 ~$*
