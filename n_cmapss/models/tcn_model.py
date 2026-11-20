@@ -2,38 +2,6 @@ import torch
 from torch import nn
 from n_cmapss.models.tcn_blocks import TemporalBlock
 
-
-print("PyTorch:", torch.__version__)
-print("CUDA:", torch.cuda.is_available())
-print("MPS:", torch.backends.mps.is_available())
-
-device = torch.device(
-    "mps" if torch.backends.mps.is_available() else "cpu"
-)
-
-print("Eğitim cihazı:", device)
-
-from n_cmapss.features.dl_sequences import (
-    DLSequenceConfig,
-    build_dl_loaders,
-)
-
-config = DLSequenceConfig(
-    fold_number=1,
-    batch_size=64,
-)
-
-train_loader, val_loader, scaler, feature_names = (
-    build_dl_loaders(config)
-)
-
-features, targets = next(iter(train_loader))
-
-print("Train windows:", len(train_loader.dataset))
-print("Validation windows:", len(val_loader.dataset))
-print("Input size:", features.shape)
-print("Target size:", targets.shape)
-
 class TCNRegressor(nn.Module):
     def __init__(
         self,

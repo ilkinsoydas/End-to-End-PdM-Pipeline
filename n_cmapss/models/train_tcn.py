@@ -6,6 +6,8 @@ from n_cmapss.features.dl_sequences import (
     DLSequenceConfig,
     build_dl_loaders,
 )
+from n_cmapss.preprocessing.data_loader import load_window_metadata, split_windows_by_fold
+import math
 import csv
 import time
 from pathlib import Path
@@ -17,9 +19,9 @@ def get_device() -> torch.device:
 
     return torch.device("cpu")
 
-def prepare_data():
+def prepare_data(fold_number: int):
     config = DLSequenceConfig(
-        fold_number=1,
+        fold_number=fold_number,
         batch_size=64,
         random_seed=42,
     )
@@ -109,13 +111,43 @@ def save_history(history: list[dict], output_path: Path) -> None:
         writer.writerows(history)
 
 
-def main() -> None:
+@torch.no_grad()
+def save_validation_results(model, loader, fold_number, output_dir, device):
+    checkpoint = torch.load(output_dir / "best_model.pt", map_location="cpu", weights_only=True)
+    model.load_state_dict(checkpoint["model_state_dict"])
+    model.eval()
+
+    _, records = split_windows_by_fold(load_window_metadata(), fold_number)
+    # build_dl_loaders preserves metadata order for validation (shuffle=False).
+    rows = []
+    for features, targets in loader:
+        predictions = model(features.to(device)).cpu().tolist()
+        for target, prediction in zip(targets.tolist(), predictions, strict=True):
+            record = records[len(rows)]
+            if target != record.rul or not math.isfinite(prediction):
+                raise ValueError(f"Invalid validation result for window {record.window_id}")
+            rows.append(dict(window_id=record.window_id, unit=record.unit, cycle=record.cycle,
+                             actual_rul=target, predicted_rul=prediction))
+
+    if not rows or len(rows) != len(records):
+        raise ValueError("Validation window count mismatch")
+    errors = [row["predicted_rul"] - row["actual_rul"] for row in rows]
+    mae = sum(abs(error) for error in errors) / len(errors)
+    rmse = math.sqrt(sum(error ** 2 for error in errors) / len(errors))
+    save_history(rows, output_dir / "predictions.csv")
+    save_history([dict(fold=fold_number, validation_unit=records[0].unit,
+                       best_epoch=checkpoint["epoch"], windows=len(rows),
+                       mae=mae, rmse=rmse)], output_dir / "metrics.csv")
+    print(f"Fold {fold_number} | Validation MAE: {mae:.4f} | RMSE: {rmse:.4f}")
+
+
+def train_fold(fold_number: int) -> None:
     torch.manual_seed(42)
     
     device = get_device()
     
     train_loader, validation_loader, scaler, feature_names = (
-        prepare_data()
+        prepare_data(fold_number=fold_number)
     )
 
     model = TCNRegressor(
@@ -135,8 +167,10 @@ def main() -> None:
     best_epoch = 0
     epochs_without_improvement = 0
     history = []
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+    run_name = f"fold_{fold_number}_{timestamp}"
     
-    run_name = datetime.now().strftime("fold_1_%Y%m%d_%H%M%S_%f")
     output_dir = (
         Path(__file__).resolve().parents[1]
         / "outputs"
@@ -195,7 +229,7 @@ def main() -> None:
                     "feature_names": feature_names,
                     "scaler_mean": scaler.scaler.mean_.tolist(),
                     "scaler_scale": scaler.scaler.scale_.tolist(),
-                    "fold": 1,
+                    "fold": fold_number,
                     "seed": 42,
                 },
                 output_dir / "best_model.pt",
@@ -234,7 +268,14 @@ def main() -> None:
         f"Best epoch: {best_epoch} | "
         f"Validation RMSE: {best_validation_mse ** 0.5:.4f}"
     )
+    save_validation_results(model, validation_loader, fold_number, output_dir, device)
     print("Results:", output_dir)
+    
+def main() -> None:
+    for fold_number in range(2, 7):
+        print(f"\nFold {fold_number} starting..")
+        train_fold(fold_number=fold_number)
+    
 
 if __name__ == "__main__":
     main()
