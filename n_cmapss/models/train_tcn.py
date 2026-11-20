@@ -150,15 +150,20 @@ def train_fold(fold_number: int) -> None:
         prepare_data(fold_number=fold_number)
     )
 
-    model = TCNRegressor(
-        input_channels = len(feature_names),
-    ).to(device)
+    learning_rate = 1e-3
+    model_config = {
+        "input_channels": len(feature_names),
+        "channels": (32, 32, 64, 64, 64, 64, 64),
+        "kernel_size": 3,
+        "dropout": 0.01,
+    }
+    model = TCNRegressor(**model_config).to(device)
     
     criterion = nn.MSELoss()
     
     optimizer = torch.optim.Adam(
         model.parameters(),
-        lr=1e-3,
+        lr=learning_rate,
     )
     max_epochs = 100
     patience = 20
@@ -175,6 +180,7 @@ def train_fold(fold_number: int) -> None:
         Path(__file__).resolve().parents[1]
         / "outputs"
         / "tcn"
+        / "blocks_6_kernel_3_dropout_0p01_lr_0p001"
         / run_name
     )
     output_dir.mkdir(parents=True, exist_ok=False)
@@ -220,12 +226,8 @@ def train_fold(fold_number: int) -> None:
                     },
                     "validation_mse": validation_mse,
                     "validation_rmse": validation_mse ** 0.5,
-                    "model_config": {
-                        "input_channels": len(feature_names),
-                        "channels": (32, 32, 64, 64, 64, 64, 64),
-                        "kernel_size": 3,
-                        "dropout": 0.2,
-                    },
+                    "model_config": model_config,
+                    "learning_rate": learning_rate,
                     "feature_names": feature_names,
                     "scaler_mean": scaler.scaler.mean_.tolist(),
                     "scaler_scale": scaler.scaler.scale_.tolist(),
@@ -272,7 +274,7 @@ def train_fold(fold_number: int) -> None:
     print("Results:", output_dir)
     
 def main() -> None:
-    for fold_number in range(2, 7):
+    for fold_number in range(1, 7):
         print(f"\nFold {fold_number} starting..")
         train_fold(fold_number=fold_number)
     
