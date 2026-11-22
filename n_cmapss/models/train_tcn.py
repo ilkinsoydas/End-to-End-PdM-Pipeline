@@ -12,6 +12,7 @@ import csv
 import time
 from pathlib import Path
 from datetime import datetime
+from n_cmapss.preprocessing.config import WINDOW_SIZE, STRIDE
 
 def get_device() -> torch.device:
     if torch.backends.mps.is_available():
@@ -179,7 +180,8 @@ def train_fold(fold_number: int) -> None:
         Path(__file__).resolve().parents[1]
         / "outputs"
         / "tcn"
-        / "seed_2026_blocks_7_kernel_3_dropout_0p01_lr_0p001"
+        / f"window_{WINDOW_SIZE}_stride_{STRIDE}"
+        / "lr_0p001"
         / run_name
     )
     output_dir.mkdir(parents=True, exist_ok=False)
@@ -232,6 +234,9 @@ def train_fold(fold_number: int) -> None:
                     "scaler_scale": scaler.scaler.scale_.tolist(),
                     "fold": fold_number,
                     "seed": 42,
+                    "window_size": WINDOW_SIZE,
+                    "stride": STRIDE,
+                    "dataset_version": f"window_{WINDOW_SIZE}_stride_{STRIDE}",
                 },
                 output_dir / "best_model.pt",
             )
