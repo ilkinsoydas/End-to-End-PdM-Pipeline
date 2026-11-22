@@ -118,7 +118,6 @@ def save_validation_results(model, loader, fold_number, output_dir, device):
     model.eval()
 
     _, records = split_windows_by_fold(load_window_metadata(), fold_number)
-    # build_dl_loaders preserves metadata order for validation (shuffle=False).
     rows = []
     for features, targets in loader:
         predictions = model(features.to(device)).cpu().tolist()
@@ -180,7 +179,7 @@ def train_fold(fold_number: int) -> None:
         Path(__file__).resolve().parents[1]
         / "outputs"
         / "tcn"
-        / "blocks_6_kernel_3_dropout_0p01_lr_0p001"
+        / "seed_2026_blocks_7_kernel_3_dropout_0p01_lr_0p001"
         / run_name
     )
     output_dir.mkdir(parents=True, exist_ok=False)
