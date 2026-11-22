@@ -1,0 +1,96 @@
+{
+  "strategy": "leave_one_engine_out",
+  "dev_units": [
+    2,
+    5,
+    10,
+    16,
+    18,
+    20
+  ],
+  "official_test_units": [
+    11,
+    14,
+    15
+  ],
+  "folds": [
+    {
+      "fold": 1,
+      "train_units": [
+        5,
+        10,
+        16,
+        18,
+        20
+      ],
+      "validation_units": [
+        2
+      ]
+    },
+    {
+      "fold": 2,
+      "train_units": [
+        2,
+        10,
+        16,
+        18,
+        20
+      ],
+      "validation_units": [
+        5
+      ]
+    },
+    {
+      "fold": 3,
+      "train_units": [
+        2,
+        5,
+        16,
+        18,
+        20
+      ],
+      "validation_units": [
+        10
+      ]
+    },
+    {
+      "fold": 4,
+      "train_units": [
+        2,
+        5,
+        10,
+        18,
+        20
+      ],
+      "validation_units": [
+        16
+      ]
+    },
+    {
+      "fold": 5,
+      "train_units": [
+        2,
+        5,
+        10,
+        16,
+        20
+      ],
+      "validation_units": [
+        18
+      ]
+    },
+    {
+      "fold": 6,
+      "train_units": [
+        2,
+        5,
+        10,
+        16,
+        18
+      ],
+      "validation_units": [
+        20
+      ]
+    }
+  ]
+}
